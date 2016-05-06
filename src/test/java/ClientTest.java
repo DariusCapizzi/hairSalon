@@ -41,4 +41,11 @@ public class ClientTest {
     assertTrue(Client .all().get(0).equals(testClient));
   }
 
+  @Test
+  public void find_returnsCorrectClientSearchedFor_Client() {
+    Client testClient = new Client("flint", 1);
+    testClient.save();
+    assertEquals(Client.find(testClient.getId()), testClient);
+  }
+
 }

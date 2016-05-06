@@ -30,6 +30,32 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
     goTo("http://localhost:4567/");
+    assertThat(pageSource()).contains("add a new stylist:");
   }
 
+  @Test
+  public void stylistsAreListedTest() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+    goTo("http://localhost:4567/");
+    assertThat(pageSource()).contains("dave");
+  }
+
+  @Test
+  public void createStylist() {
+    goTo("http://localhost:4567/");
+    fill("#stylist-name").with("dave");
+    submit("#stylist-btn");
+    assertThat(pageSource()).contains("dave");
+  }
+
+  @Test
+  public void createClient() {
+    goTo("http://localhost:4567/");
+    fill("#stylist-name").with("dave");
+    submit("#stylist-btn");
+    fill("#client-name").with("flint");
+    submit("#client-btn");
+    assertThat(pageSource()).contains("flint");
+  }
 }

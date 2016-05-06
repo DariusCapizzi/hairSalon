@@ -40,4 +40,10 @@ public class StylistTest {
     assertTrue(Stylist.all().get(0).equals(testStylist));
   }
 
+  @Test
+  public void find_returnsCorrectStylistSearchedFor_Stylist() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+    assertEquals(Stylist.find(testStylist.getId()), testStylist);
+  }
 }

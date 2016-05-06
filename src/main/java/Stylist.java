@@ -16,7 +16,7 @@ public class Stylist {
     updated_at = new Timestamp(new Date().getTime());
   }
 
-
+  //create
   public void save(){
   try(Connection con = DB.sql2o.open()) {
     String sql = "INSERT INTO stylists ( stylist_name, created_at, updated_at) VALUES ( :stylist_name, :created_at, :updated_at)";
@@ -29,12 +29,35 @@ public class Stylist {
     }
   }
 
+  //read
   public static List<Stylist> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT id, stylist_name, created_at, updated_at FROM stylists";
      return con.createQuery(sql).executeAndFetch(Stylist.class);
     }
   }
+
+  public static Stylist find(int id){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM stylists WHERE id=:id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Stylist.class);
+    }
+  }
+
+  public List<Client> thisStylistsClients(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, client_name, created_at, updated_at, stylist_id FROM clients WHERE stylist_id = :id";
+      return con.createQuery(sql)
+       .addParameter("id", this.id)
+       .executeAndFetch(Client.class);
+    }
+  }
+
+  //updated
+
+  //delete
 
   @Override
   public boolean equals(Object otherStylist) {
