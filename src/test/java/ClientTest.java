@@ -38,7 +38,7 @@ public class ClientTest {
   public void save_returnsTrueIfNamesAretheSame_Client() {
     Client testClient = new Client("flint", 1);
     testClient.save();
-    assertTrue(Client .all().get(0).equals(testClient));
+    assertTrue(Client.all().get(0).equals(testClient));
   }
 
   @Test
@@ -48,4 +48,12 @@ public class ClientTest {
     assertEquals(Client.find(testClient.getId()), testClient);
   }
 
+  @Test
+  public void remove_removesCorrectClient(){
+    Client testClient = new Client("flint", 1);
+    testClient.save();
+    assertTrue(Client.all().get(0).equals(testClient));
+    testClient.remove();
+    assertEquals(0, Client.all().size());
+  }
 }

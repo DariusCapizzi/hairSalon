@@ -55,9 +55,25 @@ public class Stylist {
     }
   }
 
-  //updated
+  //update
 
   //delete
+  public void remove(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM clients WHERE stylist_id = :id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM stylists WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
 
   @Override
   public boolean equals(Object otherStylist) {

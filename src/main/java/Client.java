@@ -2,6 +2,7 @@ import org.sql2o.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -36,7 +37,7 @@ public class Client {
   public static List<Client> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT id, client_name, created_at, updated_at,  stylist_id FROM clients";
-     return con.createQuery(sql).executeAndFetch(Client.class);
+      return con.createQuery(sql).executeAndFetch(Client.class);
     }
   }
 
@@ -61,6 +62,17 @@ public class Client {
   //update
 
   //delete
+  public void remove(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM clients WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
+
+
 
   @Override
   public boolean equals(Object otherClient) {

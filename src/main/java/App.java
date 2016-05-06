@@ -42,10 +42,44 @@ public class App {
     }, new VelocityTemplateEngine());
 
     //READ
+    // get("/stylists/:stylist_id", (req, response) -> {
+    //   Map<String, Object> model = new HashMap<String, Object>();
+    //   if(Stylist.all().size() > 0){
+    //     model.put("stylists", Stylist.all());
+    //   }
+    //   if(Client.all().size() > 0){
+    //     model.put("clients", Client.all());
+    //   }
+    //
+    //
+    //   model.put("template", "templates/stylist.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
+
+
+
 
     //UPDATE
 
+
+
     //DELETE
+    post("/stylists/:stylist_id/remove", (req, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Stylist thisStylist = Stylist.find(Integer.parseInt(req.params(":stylist_id")));
+      thisStylist.remove();
+      response.redirect("/");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/clients/:client_id/remove", (req, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Client thisClient = Client.find(Integer.parseInt(req.params(":client_id")));
+      thisClient.remove();
+      response.redirect("/");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
 
   }

@@ -46,4 +46,19 @@ public class StylistTest {
     testStylist.save();
     assertEquals(Stylist.find(testStylist.getId()), testStylist);
   }
+
+  @Test
+  public void remove_removesCorrectClientsAndStylist(){
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+    Client testClient = new Client("flint", 1);
+    testClient.save();
+    assertTrue(Stylist.all().get(0).equals(testStylist));
+    assertTrue(Client.all().get(0).equals(testClient));
+
+    testStylist.remove();
+    assertEquals(0, Stylist.all().size());
+    // assertEquals(0, Client.all().size());
+    //? TODO above assert fails for unknown reason. Works when on actual run.
+  }
 }

@@ -9,9 +9,46 @@
 		<div class="header-main headers">
 				<h3></h3>
 		</div>
+
+
     #parse( $template )
 
 
+    <div class="navigation">
 
+      <a href="/">home</a>
+
+      #if($stylists)
+        <p>Stylist(s): </p>
+        <ul>
+        #foreach($stylist in $stylists)
+          <li><a href="/stylists/$stylist.getId()">$stylist.getStylistName()</a></li>
+
+
+          <form  action="/stylists/$stylist.getId()/remove" method="post">
+            <button type="submit" id="remove-stylist">remove $stylist.getStylistName()</button>
+          </form>
+
+          <form  action="/stylists/$stylist.getId()/client/new" method="post">
+            <label for="client-name">add a client to this stylist: <input type="test" name="client-name" id="client-name" ></label>
+            <button type="submit">go</button>
+          </form>
+
+        #end
+        </ul>
+      #end
+
+
+      #if($clients)
+        <p>Client(s): </p>
+        <ul>
+        #foreach($client in $clients)
+          <li><a href="/clients/$client.getId()">$client.getClientName()</a>, stylist: <a href="/stylists/$client.getStylistId()">$client.getStylistName()</a></li>
+          <form  action="/clients/$client.getId()/remove" method="post">
+            <button type="submit" id="remove-client">remove $client.getClientName()</button>
+          </form>
+        #end
+      #end
+    </div>
  </body>
 </html>

@@ -58,4 +58,27 @@ public class AppTest extends FluentTest {
     submit("#client-btn");
     assertThat(pageSource()).contains("flint");
   }
+
+  @Test
+  public void deleteStylist() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+
+    goTo("http://localhost:4567/");
+    submit("#remove-stylist");
+    assertThat(pageSource()).doesNotContain("dave");
+  }
+
+  @Test
+  public void deleteClient() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+    Client myClient = new Client("flint", testStylist.getId());
+    myClient.save();
+
+    goTo("http://localhost:4567/");
+    submit("#remove-client");
+    assertThat(pageSource()).doesNotContain("flint");
+  }
+
 }
