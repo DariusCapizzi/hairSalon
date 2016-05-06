@@ -34,4 +34,11 @@ public class ClientTest {
     assertTrue(firstClient.equals(secondClient));
   }
 
+  @Test
+  public void save_returnsTrueIfNamesAretheSame_Client() {
+    Client testClient = new Client("flint", 1);
+    testClient.save();
+    assertTrue(Client .all().get(0).equals(testClient));
+  }
+
 }

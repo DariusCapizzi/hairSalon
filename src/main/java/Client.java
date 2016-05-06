@@ -18,6 +18,26 @@ public class Client {
     this.stylist_id =  stylist_id;
   }
 
+  public void save(){
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "INSERT INTO clients ( client_name, created_at, updated_at,  stylist_id) VALUES ( :client_name, :created_at, :updated_at, :stylist_id)";
+    this.id = (int) con.createQuery(sql, true)
+      .addParameter("client_name", client_name)
+      .addParameter("created_at", created_at)
+      .addParameter("updated_at", updated_at)
+      .addParameter("stylist_id", stylist_id)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static List<Client> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, client_name, created_at, updated_at,  stylist_id FROM clients";
+     return con.createQuery(sql).executeAndFetch(Client.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherClient) {
     if(!(otherClient instanceof Client)) {

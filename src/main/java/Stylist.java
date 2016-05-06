@@ -16,6 +16,26 @@ public class Stylist {
     updated_at = new Timestamp(new Date().getTime());
   }
 
+
+  public void save(){
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "INSERT INTO stylists ( stylist_name, created_at, updated_at) VALUES ( :stylist_name, :created_at, :updated_at)";
+    this.id = (int) con.createQuery(sql, true)
+      .addParameter("stylist_name", stylist_name)
+      .addParameter("created_at", created_at)
+      .addParameter("updated_at", updated_at)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static List<Stylist> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, stylist_name, created_at, updated_at FROM stylists";
+     return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherStylist) {
     if(!(otherStylist instanceof Stylist)) {
