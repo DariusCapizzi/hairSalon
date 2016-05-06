@@ -17,4 +17,20 @@ public class StylistTest {
     assertTrue(myStylist instanceof Stylist);
   }
 
+  @Test
+  public void getCreatedAtAndgetUpdatedAt_returnTimestamps_hours(){
+    Stylist myStylist = new Stylist("dave");
+    Timestamp testCreatedAt = new Timestamp(new Date().getTime());
+    assertEquals(myStylist.getCreatedAt().getHours(), testCreatedAt.getHours());
+    assertEquals(myStylist.getUpdatedAt().getHours(), testCreatedAt.getHours());
+  }
+
+
+  @Test
+  public void equals_returnsTrueIfDescriptionsAretheSame() {
+    Stylist firstStylist = new Stylist("dave");
+    Stylist secondStylist = new Stylist("dave");
+    assertTrue(firstStylist.equals(secondStylist));
+  }
+
 }

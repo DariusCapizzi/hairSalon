@@ -16,4 +16,30 @@ public class Stylist {
     updated_at = new Timestamp(new Date().getTime());
   }
 
+  @Override
+  public boolean equals(Object otherStylist) {
+    if(!(otherStylist instanceof Stylist)) {
+      return false;
+    } else {
+      Stylist newStylist = (Stylist) otherStylist;
+      return this.getStylistName().equals(newStylist.getStylistName()) &&
+      this.getId() == newStylist.getId();
+    }
+  }
+
+  public int getId(){
+    return id;
+  }
+
+  public String getStylistName(){
+    return stylist_name;
+  }
+
+  public Timestamp getCreatedAt(){
+    return created_at;
+  }
+
+  public Timestamp getUpdatedAt(){
+    return updated_at;
+  }
 }
