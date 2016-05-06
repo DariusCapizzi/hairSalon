@@ -1,0 +1,24 @@
+<h1>$stylist.getStylistName()</h1>
+<!-- 
+
+<form  action="/stylists/$stylist.getId()/edit" method="post">
+  <label for="stylist-name">change name of this stylist: <input type="test" name="stylist-name" class="stylist-name" ></label>
+  <button type="submit">go</button>
+</form> -->
+
+<form  action="/stylists/$stylist.getId()/client/new" method="post">
+  <label for="client-name">add a client to this stylist: <input type="test" name="client-name" class="client-name" ></label>
+  <button type="submit">go</button>
+</form>
+
+
+#if($stylist.thisStylistsClients().size() > 0)
+  <p>Client(s): </p>
+  <ul>
+  #foreach($client in $stylist.thisStylistsClients())
+    <li><a href="/clients/$client.getId()">$client.getClientName()</a>, stylist: <a href="/stylists/$client.getStylistId()">$client.getStylistName()</a></li>
+    <form  action="/clients/$client.getId()/remove" method="post">
+      <button type="submit" id="remove-client">remove $client.getClientName()</button>
+    </form>
+  #end
+#end

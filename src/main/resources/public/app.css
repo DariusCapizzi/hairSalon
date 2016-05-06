@@ -1,0 +1,57 @@
+.navigation {
+  background-image: url(/paper.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  -webkit-box-shadow: 0 0 15px 12px #ffffe6;
+   -moz-box-shadow: 0 0 15px 12px #ffffe6;
+   box-shadow: 0 0 15px 12px #ffffe6;
+
+  float: right;
+  width: 30%;
+  display: inline-block;
+  /*border-left: 2px dashed black;*/
+  padding: 25px;
+}
+
+.main-content {
+
+
+  margin-top: 100px;
+  margin-left: 100px;
+  width: 40%;
+  display: inline-block;
+}
+
+form {
+  margin: 15px;
+}
+
+body {
+  background-color: #ffe6b3;
+  font-family: cursive;
+}
+
+a {
+  color: #6c6ce0;
+  font-family: monospace;
+}
+
+input {
+  background-color: #ffeecc
+}
+
+button {
+  background: #ffeecc;
+}
+
+.header-main {
+  background-image: url(/wall-paper.jpg);
+  text-align: center;
+  margin: 50px;
+  -webkit-box-shadow: 0 0 15px 12px #ffffe6;
+   -moz-box-shadow: 0 0 15px 12px #ffffe6;
+   box-shadow: 0 0 15px 12px #ffffe6;
+  padding: 5px;
+  text-shadow: 1px 1px 10px white;
+}

@@ -28,6 +28,7 @@ public class App {
       String inStylistName = req.queryParams("stylist-name");
       Stylist newStylist = new Stylist(inStylistName);
       newStylist.save();
+      System.out.println(req.uri());
       response.redirect("/");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -42,21 +43,35 @@ public class App {
     }, new VelocityTemplateEngine());
 
     //READ
-    // get("/stylists/:stylist_id", (req, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   if(Stylist.all().size() > 0){
-    //     model.put("stylists", Stylist.all());
-    //   }
-    //   if(Client.all().size() > 0){
-    //     model.put("clients", Client.all());
-    //   }
-    //
-    //
-    //   model.put("template", "templates/stylist.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    get("/stylists/:stylist_id", (req, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      if(Stylist.all().size() > 0){
+        model.put("stylists", Stylist.all());
+      }
+      if(Client.all().size() > 0){
+        model.put("clients", Client.all());
+      }
+
+      Stylist thisStylist = Stylist.find(Integer.parseInt(req.params(":stylist_id")));
+      model.put("stylist", thisStylist);
+      model.put("template", "templates/stylist.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
+    get("/clients/:client_id", (req, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      if(Stylist.all().size() > 0){
+        model.put("stylists", Stylist.all());
+      }
+      if(Client.all().size() > 0){
+        model.put("clients", Client.all());
+      }
+      Client thisClient = Client.find(Integer.parseInt(req.params(":client_id")));
+      model.put("client",thisClient);
+      model.put("template", "templates/client.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
     //UPDATE
