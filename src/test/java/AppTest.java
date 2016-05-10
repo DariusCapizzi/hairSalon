@@ -103,6 +103,30 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("flint");
   }
 
-  
+  @Test
+  public void updateStylist() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+
+    goTo("http://localhost:4567/stylists/"+testStylist.getId());
+    fill("#change_stylist_name").with("carl");
+    submit("#changeStylistName");
+    assertThat(pageSource()).contains("carl");
+  }
+
+  @Test
+  public void updateClient() {
+    Stylist testStylist = new Stylist("dave");
+    testStylist.save();
+    Client myClient = new Client("flint", testStylist.getId());
+    myClient.save();
+
+    goTo("http://localhost:4567/clients/"+myClient.getId());
+    fill("#change_client_name").with("clint");
+    submit("#changeClientName");
+    assertThat(pageSource()).contains("clint");
+  }
+
+
 
 }

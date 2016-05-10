@@ -1,2 +1,12 @@
-<h1>$client.getClientName()</h1>
-<p>$client.getStylistName()</p>
+<h1><a href="/clients/$client.getId()">$client.getClientName()</a>, stylist: <a href="/stylists/$client.getStylistId()">$client.getStylistName()</a></h1>
+
+
+<form  action="/clients/$client.getId()/edit" method="post">
+  <label for="change_client_name">change name of this client: <input type="text" name="change_client_name" id="change_client_name" ></label>
+  <button id="changeClientName" type="submit">go</button>
+</form>
+
+
+<form  action="/clients/$client.getId()/remove" method="post">
+  <button type="submit" id="remove-client">remove $client.getClientName()</button>
+</form>

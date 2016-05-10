@@ -21,10 +21,6 @@ _add, remove, and alter "stylists" and "clients" with an associated database. Th
 * _enter client name under the stylist on right panel_
 * _enjoy_
 
-## Known Bugs
-
-_the pages for individual clients/stylists are not very useful, and any editing in them will route back to the homepage_
-
 
 ## Technologies Used
 

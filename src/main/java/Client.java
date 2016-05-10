@@ -60,6 +60,27 @@ public class Client {
   }
 
   //update
+  public void updateName(String newValue){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET client_name = :newValue WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("newValue", newValue)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateAll(String thingToUpdate, String newValue){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET :thingToUpdate = :newValue WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("newValue", newValue)
+        .addParameter("thingToUpdate", thingToUpdate)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
 
   //delete
   public void remove(){
